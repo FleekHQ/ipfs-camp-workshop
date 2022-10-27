@@ -12,8 +12,7 @@ import {
   PluginStorageUploadMethodOptions,
   PluginValidateCredentialsMethodOptions,
 } from '@fleekhq/plugin-helpers';
-// @ts-ignore
-import createIpfsClient, { globSource } from 'ipfs-http-client';
+import { create, globSource } from 'ipfs-http-client';
 
 import packageJSON from '../../package.json';
 import { METHOD_NOT_IMPLEMENTED } from '../errors';
@@ -66,7 +65,7 @@ export class PluginStorageIPFS extends PluginStorage<AuthenticationCredential, I
   }
 
   private initClient(_: PluginCommonMethodOptions<AuthenticationCredential>) {
-    const ipfsInstance = createIpfsClient({ url: 'https://my-cool-ipfs-app.com/api/v1' });
+    const ipfsInstance = create({ url: 'https://my-cool-ipfs-app.com/api/v1' });
 
     return ipfsInstance;
   }
@@ -75,14 +74,15 @@ export class PluginStorageIPFS extends PluginStorage<AuthenticationCredential, I
   public async upload(options: PluginStorageUploadMethodOptions<AuthenticationCredential>) {
     const ipfs = this.initClient(options);
 
-    const folderHash = await ipfs.add(
-      globSource(options.instanceFields?.folderName, {
+    const addResult = await ipfs.add(
+      // @ts-ignore
+      globSource(options.instanceFields?.folderName || './dist', {
         recursive: true,
       })
     );
 
     return {
-      instanceFields: { folderHash },
+      instanceFields: { folderHash: addResult.cid.toString() },
     };
   }
 

@@ -9,7 +9,7 @@
   "private": false,
   "dependencies": {
     "@fleekhq/plugin-helpers": "0.0.1-alpha2",
-    "ipfs-http-client": "^47.0.0"
+    "ipfs-http-client": "52.0.5"
   },
   "devDependencies": {
     "prettier": "^2.7.1"
