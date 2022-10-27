@@ -1,0 +1,17 @@
+{
+  "name": "@fleekhq/ipfs-camp-workshop",
+  "version": "0.0.0",
+  "description": "2022 IPFS camp plugins workshop",
+  "main": "src/index.ts",
+  "repository": "https://github.com/FleekHQ/ipfs-camp-workshop",
+  "author": "fleekhq",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "@fleekhq/plugin-helpers": "0.0.1-alpha2",
+    "ipfs-http-client": "^47.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1"
+  }
+}
